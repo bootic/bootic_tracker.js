@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Tracker test</title>
+
+  <link rel="shortcut icon" type="image/png" href="jasmine_favicon.png">
+
+</head>
+
+<body>
+  <script type="text/javascript">
+    var _btc = _btc || [];
+    _btc.push(['_setLogger', true]);
+    _btc.push(['_trackPageview']);
+    _btc.push(['_trackEvent', {foo:1}]);
+    
+    ;(function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'bootic-tracker';
+      t.setAttribute('data-account', 'test_account');
+      t.setAttribute('data-app', 'bootic_tracker_app');
+      t.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + "localhost:5556/tracker.js";
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+</body>
+</html>
