@@ -6,7 +6,7 @@
 # - dist/0.0.1/
 # - dist/0.0/
 #
-version '0.0.1'
+version '0.0.2'
 
 # put your development files here
 #
@@ -24,7 +24,7 @@ end
 filter do |src, config|
   src
     .gsub(/<VERSION>/, config.version.to_s)
-    .gsub /<TRACKING_HOST>/, '74.207.237.137:8080'
+    .gsub /<TRACKING_HOST>/, 'tracker.bootic.net'
 end
 
 # your packaged, versioned releases go here
