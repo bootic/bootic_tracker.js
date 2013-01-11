@@ -56,7 +56,7 @@
       return Math.round(new Date().getTimezoneOffset() / 60); // -2, 4, etc
     },
     
-    url: function (evtType) {
+    url: function (evtType, evtName) {
       var u = [protocol, trackingHost, 'r', this.appName, this.accountId, evtType].join('/')
       u += "?r="    + this.resource();
       u += "&ref="  + this.referrer();
@@ -66,6 +66,9 @@
       u += "&ua="   + this.agent();
       u += "&path=" + this.path();
       u += "&tz="   + this.timezoneOffset()
+      if(evtName) {
+        u += "&status=" + evtName
+      }
 
       return u
     },
@@ -130,9 +133,9 @@
       image.src = this.url('pageview')
     },
     
-    _trackEvent: function (evtData) {
-      this.log('pageevent', evtData)
-      image.src = this.url('pageevent')
+    _trackEvent: function (evtName) {
+      this.log('pageevent', evtName)
+      image.src = this.url('pageevent', evtName)
     },
     
     _setLogger: function (bool) {
