@@ -63,7 +63,6 @@
       u += "&tt="   + this.title();
       u += "&h="    + this.domain();
       u += "&user=" + this.sessionId();
-      u += "&ua="   + this.agent();
       u += "&path=" + this.path();
       u += "&tz="   + this.timezoneOffset()
       if(evtName) {
