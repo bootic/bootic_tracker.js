@@ -5,7 +5,7 @@
   var _btc = _btc || [];
   _btc.push(['_setLogger', true]);
   _btc.push(['_trackPageview']);
-  _btc.push(['_trackEvent', 'test_event']);
+  _btc.push(['_trackEvent', 'test_event', 'foo']);
   
   ;(function() {
     var t   = document.createElement('script');

@@ -101,10 +101,10 @@
     },
     
     sessionId: function () {
-      var session_id = this.getCookie(session_id)
-      if(!session_id) {
+      var uid = this.getCookie(session_id)
+      if(!uid) {
         session_id = new Date().getTime() + Math.random() + Math.random()
-        this.setCookie(session_id, session_id)
+        this.setCookie(uid, session_id)
       }
       return session_id
     },
@@ -132,13 +132,17 @@
       image.src = this.url('pageview')
     },
     
-    _trackEvent: function (evtName) {
-      this.log('pageevent', evtName)
-      image.src = this.url('pageevent', evtName)
+    _trackEvent: function (evtType, evtName) {
+      this.log('pageevent', evtType)
+      image.src = this.url(evtType, evtName)
     },
     
     _setLogger: function (bool) {
       this._logging = bool
+    },
+    
+    _setTrackingHost: function (host) {
+      trackingHost = host
     }
   }
   
@@ -149,6 +153,10 @@
   var _tracker = new Tracker(accountId, appName);
   
   /* iterate registered events and push them to tracker instance */
+  if(window._btc == undefined) {
+    throw new Error("You need to define _btc global array")
+  }
+  
   for(var i = 0; i < window._btc.length; i++) {
     _tracker.push(window._btc[i])
   }
