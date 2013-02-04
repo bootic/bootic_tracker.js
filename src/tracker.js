@@ -103,10 +103,10 @@
     sessionId: function () {
       var uid = this.getCookie(session_id)
       if(!uid) {
-        session_id = new Date().getTime() + Math.random() + Math.random()
-        this.setCookie(uid, session_id)
+        var tstamp = new Date().getTime() + Math.random() + Math.random()
+        this.setCookie(session_id, tstamp)
       }
-      return session_id
+      return tstamp
     },
     
     log: function () {
