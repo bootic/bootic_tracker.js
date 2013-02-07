@@ -78,7 +78,7 @@ OTHER DEALINGS IN THE SOFTWARE.
     },
     
     timezoneOffset: function () {
-      return Math.round(new Date().getTimezoneOffset() / 60); // -2, 4, etc
+      return Math.round(new Date().getTimezoneOffset() / 60) * -1; // -2, 4, etc
     },
     
     url: function (evtType, evtName) {
