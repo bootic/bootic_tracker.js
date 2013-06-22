@@ -2,12 +2,12 @@
   var image = new Image(),
       session_id = '_btic_track_sid_',
       trackingHost = '<TRACKING_HOST>',
-      protocol = ('https:' == document.location.protocol ? 'https://' : 'http://');
+      protocol = (document.location.protocol + '//');
   
   var Tracker = function (accountId, appName) {
     this.accountId  = accountId;
     this.appName    = appName;
-    this._logging   = false
+    this._logging   = true
   }
   
   Tracker.prototype = {
@@ -57,7 +57,7 @@
     },
     
     url: function (evtType, evtName) {
-      var u = [protocol, trackingHost, 'r', this.appName, this.accountId, evtType].join('/')
+      var u = protocol + [trackingHost, 'r', this.appName, this.accountId, evtType].join('/');
       u += "?r="    + this.resource();
       u += "&ref="  + this.referrer();
       u += "&tt="   + this.title();
@@ -65,6 +65,7 @@
       u += "&user=" + this.sessionId();
       u += "&path=" + this.path();
       u += "&tz="   + this.timezoneOffset()
+      u += "&_ts="   + new Date().getTime();
       if(evtName) {
         u += "&status=" + evtName
       }
