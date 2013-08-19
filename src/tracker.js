@@ -1,13 +1,21 @@
 ;(function (document, Math, navigator, window) {
   var image = new Image(),
-      session_id = '_btic_track_sid_',
+      session_id = '_btic_track_sid2_',
       trackingHost = '<TRACKING_HOST>',
-      protocol = (document.location.protocol + '//');
+      protocol = (document.location.protocol + '//'),
+      cookieAge = 60 * 60 * 24 * 730; // 2 years in seconds
   
   var Tracker = function (accountId, appName) {
     this.accountId  = accountId;
     this.appName    = appName;
     this._logging   = true
+    this._sessionId = this.getCookie(session_id);
+    this._unique    = this._sessionId == null;
+    
+    if(this._unique) {
+      this._sessionId = new Date().getTime() + Math.random() + Math.random()
+      this.setCookie(session_id, this._sessionId, cookieAge)
+    }
   }
   
   Tracker.prototype = {
@@ -69,7 +77,12 @@
       if(evtName) {
         u += "&status=" + evtName
       }
-
+      if(this._unique) {
+        u += "&unq=1"
+      }
+      // Send unique only once.
+      this._unique = false
+      
       return u
     },
     
@@ -102,12 +115,7 @@
     },
     
     sessionId: function () {
-      var uid = this.getCookie(session_id)
-      if(!uid) {
-        var tstamp = new Date().getTime() + Math.random() + Math.random()
-        this.setCookie(session_id, tstamp)
-      }
-      return tstamp
+      return this._sessionId
     },
     
     log: function () {
