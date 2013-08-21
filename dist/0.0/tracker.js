@@ -25,7 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 ------------------------------------------------------------------*/
 ;(function (document, Math, navigator, window) {
   var image = new Image(),
-      session_id = '_btic_track_sid2_',
+      session_id = '_btc_sid_',
       trackingHost = 'tracker.bootic.net',
       protocol = (document.location.protocol + '//'),
       cookieAge = 60 * 60 * 24 * 730; // 2 years in seconds
